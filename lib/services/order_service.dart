@@ -23,13 +23,13 @@ class OrderService extends ChangeNotifier {
         accuracy: 0,
         altitude: 0,
         heading: 0,
-        speed: 0,
+        speed: 1,
         speedAccuracy: 0, altitudeAccuracy:0, headingAccuracy: 0,
       ),
       customerName: 'John Doe',
       customerLocation: Position(
         latitude:29.44438034735623, // Delhi coordinates (adjust for your testing)
-        longitude: 77.8520229955407,
+        longitude: 77.8520229955408,
         timestamp: DateTime.now(),
         accuracy: 0,
         altitude: 0,
