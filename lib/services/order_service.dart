@@ -14,8 +14,8 @@ class OrderService extends ChangeNotifier {
   /// Initialize with a mock order
   void initializeMockOrder() {
     _currentOrder = OrderModel(
-      orderId: 'ORD-12345',
-      restaurantName: 'Pizza Palace',
+      orderId: 'ORD-123455',
+      restaurantName: 'Pizza Palace 2',
       restaurantLocation: Position(
         latitude:28.4443803473562, // Delhi coordinates (adjust for your testing)
         longitude: 77.8520229955407,
@@ -61,7 +61,7 @@ class OrderService extends ChangeNotifier {
     return false;
   }
 
-  /// Check if next action is allowed based on geofencing
+
   bool canProceedToNextStatus(OrderStatus currentStatus, bool isAtRestaurant, bool isAtCustomer) {
     switch (currentStatus) {
       case OrderStatus.assigned:
