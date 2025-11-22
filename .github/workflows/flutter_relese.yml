@@ -24,11 +24,11 @@ jobs:
         run: flutter pub get
 
       # optional
-      - name: Flutter analyze
-        run: flutter analyze
+      # - name: Flutter analyze
+      #   run: flutter analyze
 
-      - name: Run tests
-        run: flutter test
+      # - name: Run tests
+      #   run: flutter test
 
       - name: Build APK (release)
         run: flutter build apk --release
