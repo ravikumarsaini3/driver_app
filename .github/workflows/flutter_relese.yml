@@ -3,8 +3,10 @@ name: Flutter Release Build
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
+      - main          # Normal CI build
+    tags:
+      - 'v*.*.*'      # e.g. v1.0.0 → tag push par release
+  workflow_dispatch:  # Run manually
 
 jobs:
   build-android-release:
@@ -18,12 +20,12 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'   # ✅ only this, no flutter-version
+          channel: 'stable'   # Only channel, no flutter-version
 
       - name: Flutter pub get
         run: flutter pub get
 
-      # optional
+      # optional (agar test/analyze nahi chahiye to skip)
       # - name: Flutter analyze
       #   run: flutter analyze
 
@@ -33,8 +35,17 @@ jobs:
       - name: Build APK (release)
         run: flutter build apk --release
 
-      - name: Upload APK as artifact
+      - name: Upload APK as artifact (Actions ke liye)
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/*.apk
+
+      # 🔹 Ye step APK ko GitHub Release me dikhayega (only tag push pe chalega)
+      - name: Upload to GitHub Release (only if tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/app/outputs/flutter-apk/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
