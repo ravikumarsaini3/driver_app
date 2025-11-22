@@ -29,7 +29,7 @@ class _AssignedOrderScreenState extends State<AssignedOrderScreen> {
     if (!locationInitialized) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Location permission required for this app to work'),
+          content: Text('LLocation permission required for this app to work'),
           backgroundColor: Colors.red,
         ),
       );
