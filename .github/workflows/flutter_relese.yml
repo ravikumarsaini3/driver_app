@@ -3,8 +3,8 @@ name: Flutter Release Build
 on:
   push:
     branches:
-      - main       # sirf main branch pe push hone par chalega
-  workflow_dispatch: # manually bhi run kar sakte ho GitHub se
+      - main
+  workflow_dispatch:
 
 jobs:
   build-android-release:
@@ -18,13 +18,12 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'
-          channel: 'stable'
+          channel: 'stable'   # ✅ only this, no flutter-version
 
       - name: Flutter pub get
         run: flutter pub get
 
-      # optional but good practice – agar nahi chahiye to comment kar sakte ho
+      # optional
       - name: Flutter analyze
         run: flutter analyze
 
